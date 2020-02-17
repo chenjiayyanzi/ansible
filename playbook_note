@@ -1,0 +1,2 @@
+#check mode: is just a simulation
+ansible-playbook python_pb.yml --check

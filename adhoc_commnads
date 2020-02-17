@@ -1,0 +1,43 @@
+#using the ansible command, ansible allows admin to run sd-hoc commands
+ansible multi -a "hostname"
+
+#add argument -f 1 to tell ansible to use only one fork
+ansible multi -a "hostname" -f 1
+
+#check disk
+ansible multi -a "df -h"
+
+#check memory
+ansible multi -a "free -m"
+
+#check time
+ansible multi -a "date"
+
+
+@list of all the environment details
+ansible [host-or-group] -m setup
+
+#install ntp service 
+#-b alias for sudo
+#if user account requires a sudo password, you should pass -K also
+ansible multi -b -m yum -a "name=ntp state=present"
+
+#start ntpd service
+ansible multi -b -m service -a "name=ntpd state=started enabled=yes"
+
+#start/stop/status of service
+ansible multi -b -a "service ntpd start/stop/status"
+
+#install django in app servers
+ansible app -b -m yum -a "name=MySQL-python state=present"
+ansible app -b -m yum -a "name=python-setuptools state=present"
+ansible app -b -m easy_install -a "name=django state=present"
+#last command was failed because servers use python 2.7 
+#so refer to python_pb.yml
+ansible-playbook python_pb.yml
+#but after that it doesnt work with ansible....
+#so let add one line in hosts file, for example /etc/ansible/hosts
+ansible_python_interpreter=/usr/bin/python2.7
+
+
+
