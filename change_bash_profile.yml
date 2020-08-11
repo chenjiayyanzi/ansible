@@ -1,0 +1,14 @@
+---
+- hosts: all
+  remote_user: vagrant
+  tasks:
+   - name: add an environment variable to the remote user's shell
+     lineinfile:
+       dest: ~/.bash_profile
+       regexp: ^ENV_VAR=
+       line: ENV_VAR=value
+   - name: Get the value of the environment variable we just added
+     shell: 'source ~/.bash_profile && echo $ENV_VAR'
+     register: foo
+   - name: print the value of the environment variable
+     debug: msg="The variable is {{ foo.stdout }}"

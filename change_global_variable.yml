@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: add a variable
+      lineinfile:
+        dest: /etc/environment
+        regexp: ^ENV_VAR
+        line: ENV_VAR=value
+

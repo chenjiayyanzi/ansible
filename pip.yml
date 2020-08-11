@@ -1,0 +1,10 @@
+---
+- hosts: app
+  become: yes
+  tasks:
+    - name: install python-dnf
+      yum: name=python-dnf state=present
+    - name: install pip3
+      dnf: 
+        name: pip3
+        state: present

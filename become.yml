@@ -1,0 +1,22 @@
+---
+- hosts: multi
+  remote_user: jiayu
+  tasks: 
+  - name: test connection
+    ping:
+
+- hosts: app
+  remote_user: jiayu
+  tasks:
+   - name: add epel-relese repo
+     yum: name=epel-release state=present
+     become: yes
+     become_method: sudo
+   - name: install nginx
+     yum: name=nginx state=latest
+     become: yes
+     become_method: sudo
+   - name: start nginx
+     service: name=nginx state=started
+     become: yes
+     become_method: sudo

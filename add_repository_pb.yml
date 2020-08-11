@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+  - name: install remi repo
+    yum:
+      name: "http://rpms.remirepo.net/enterprise/remi-release-7.rpm"
+      state: present
+  - name: import remi GPG key
+    rpm_key:
+      key: "http://rpms.remirepo.net/RPM-GPG-KEY-remi"
+      state: present
+  - name: install epel repo
+    yum: name=epel-release state=present
+  - name: install node.js and npm
+    yum: name=npm state=present enablerepo=epel
+  - name: install forever
+    npm: name=forever global=yes state=present

@@ -1,0 +1,26 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: install Apache
+      yum:
+        name: ['httpd','httpd-devel']
+        state: present
+    - name: copy configuration files
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: 0644
+      with_items:
+      - {
+             src: "/path/to/config/config",
+             dest: "/etc/httpd/conf/httpd.conf"
+        }
+      - {
+             src: "/path/to/config/httpd-vhosts.conf",
+             dest: "/etc/httpd/conf/httpd-vhosts.conf"
+        }
+    - name: make sure apache is started and configure it to run at boot
+      service: name=httpd state=started enabled=yes

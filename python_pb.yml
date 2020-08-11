@@ -1,0 +1,11 @@
+---
+- hosts: app
+  become: yes
+  tasks:
+  - name: install python3
+    yum: name=python3 state=present
+  - name: create symbolic link 
+    file:
+     src: "/usr/bin/python3"
+     dest: "/usr/bin/python"
+     state: link
