@@ -1,0 +1,4 @@
+for host in centos1 centos2 
+do
+  ssh-copy-id ${host}
+done

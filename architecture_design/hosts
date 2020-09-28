@@ -1,0 +1,20 @@
+[app]
+192.168.60.[4:5]
+
+[app:vars]
+ansible_user=vagrant
+ansible_port=22
+
+[db]
+192.168.60.6 ansible_ssh_user=vagrant ansible_ssh_key_file=~/.ssh/id_rsa
+
+[user]
+192.168.60.4 ansible_user=vagrant
+
+[become_user]
+192.168.60.4 ansible_become=true ansible_become_password=password
+
+[connection]
+localhost ansible_connection=local
+192.168.60.4 ansible_connection=ssh ansible_user=vagrant
+

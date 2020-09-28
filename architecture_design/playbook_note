@@ -30,6 +30,8 @@ time ansible-playbook ntp_playbook.yml
 #run with variables
 ansible-playbook motd_playbook.yml -e "motd=Testing through command line argument"
 
+#run with external variable files
+ansible-playbook playbook.yml -e @extra_vars_file.yml
 
 
                     Ansible playbook yaml file section

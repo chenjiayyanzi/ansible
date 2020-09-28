@@ -1,0 +1,84 @@
+#variable part in ansible playbook
+
+#example 1: simple dictionary
+vars: 
+  example_key: example_value
+
+tasks:
+  - name : test dictionary key value
+    debug:
+      msg: "{{ example_key }}"
+      
+
+#example 2: dictionary
+vars:
+  dict:
+    dict_key: This is a dictionary value
+
+tasks:
+  - name: Test named dictionary
+    debug:
+      msg: "{{ dict.dict_key }}"
+
+
+#example 3: list
+vars: 
+  list:
+    - item1
+    - item2
+    - item3
+    - item4
+
+tasks:
+  - name: test lit first item
+    debug:
+      msg: "{{ list.0 }}"
+
+#example 4: vars file
+vars_files:
+  - external_vars.yml
+
+tasks:
+  - name: test external dictionary
+    debug:
+      msg: "{{external_example_key}}"
+
+  - name: test external list
+    debug:
+      msg: "{{external_list.0}}"
+
+cat external_vars.yml
+---
+external_example_key: value
+
+external_list:
+  - item1
+  - item2
+  - item3
+...
+
+
+#example 5: vars_prompt
+vars_prompt:
+  - name: username
+    private: false
+  - name: password
+    private: true
+
+tasks:
+  - name: test vars prompt
+    debug:
+      msg: "{{ username }}"
+
+#example 6: test host vars in hosts file
+#no need to imply the vars file
+tasks:
+  - name: test hostvars with ansible fact and collect ansible port, default if not found
+    debug:
+      msg: "{{ hostvars[ansible_all_ipv4_addresses[0]]['ansible_port'] | default('22') }}"
+
+#example 7: test group vars in hosts file
+tasks:
+  - name: test Groupvars
+    debug:
+      msg: "{{ ansible_user }}"

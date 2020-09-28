@@ -1,0 +1,4 @@
+---
+ansible_become: tru
+ansible_become_pass: password
+...

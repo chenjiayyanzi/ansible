@@ -1,0 +1,32 @@
+ansible config file can be in the following directory:
+./ansible.cfg
+~/.ansible.cfg
+/etc/ansible/ansible.cfg
+
+#if you set ansible config file by env variable:
+export ANSIBLE_CONFIG=/home/username/ansible.cfg
+#the default config file will this one
+
+#run command to see
+ansible --version
+
+basically, the search path is: ANSIBLE_CONFIG --> ./ansible.cfg --> ~/.ansible.cfg  --> /etc/ansible/ansible.cfg
+
+host file: for all the machine to control
+[all]
+hostname1
+hostname2
+...
+
+Here we are using Vagrant to create three VM(app1,app2,db), so we need to config hosts file like this:
+192.168.60.4 ansible_ssh_user=vagrant ansible_ssh_key_file=~/.ssh/id_rsa
+
+then add you id_ras.pub publickey into the VM machine 
+vagrant ssh app1
+vi ~/.ssh/authorized_keys
+#add your publickey 
+#another way is using ssh-copy-id hostname 
+
+then we can connect to VMs using ansible:
+ansible all -m ping
+

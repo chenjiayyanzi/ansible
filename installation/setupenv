@@ -1,0 +1,23 @@
+#for example installation on Linux Ubuntu
+sudo apt-get upgrade
+
+sudo apt-get install python-minimal virtualenv python-dev build-essential
+
+mkdir ansible
+cd ansible
+
+#install ansible in virtual environment for better management: decide python version, upgrade 
+virtualenv venv27
+source venv27/bin/activate
+
+#check python and pip come from the virtual environment 
+which python
+which pip
+
+
+#install ansible by pip
+pip install ansible==2.10
+ansible --version
+
+#exit virtualenv
+deactivate
