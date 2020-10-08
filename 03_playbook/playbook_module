@@ -1,0 +1,26 @@
+set_fact: reference ansible-doc set_fact
+
+pause: pause for given time
+- name: pause for 5 minutes
+  pause: 
+    minutes: 5
+
+wait_for: wait a mount of time or service to be up
+- name: wait fot port 80 to be running
+  wait_for: 
+    port: 80
+
+add_host: use variables to create new host and group
+
+
+group_by: use facts to create group 
+- name: create group based on ansible_distribution
+  group_by:
+    key: custom_{{ ansible_distribution | lower }}
+
+fetch: fetching files from remote server
+- name: fetch release file
+  fetch: 
+    src: /etc/redhat-release
+    dest: /tmp/release
+    flat: yes

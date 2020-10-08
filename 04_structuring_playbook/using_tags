@@ -1,0 +1,72 @@
+#using tags
+you can run only specific parts of a large playbook with ansible tags
+
+
+#example 1: tag to individual tasks
+#for example, if you have a few tasks with the same tag "ntp", you can run these
+#tasks in a playbook with --tags ntp.
+tasks:
+  - name: Install ntp
+    ansible.builtin.yum:
+      name: ntp
+      state: present
+    tags: ntp
+
+  - name: Configure ntp
+    ansible.builtin.template
+      src: ntp.conf.j2
+      dest: /etc/ntp.conf
+    notify:
+    - restart ntpd
+    tags: ntp
+
+  - name: Enable and run ntpd
+    ansible.builtin.service:
+      name: ntpd
+      state: started
+      enabled: yes
+    tags: ntp
+
+  - name: Install NFS utils
+    ansible.builtin.yum:
+      name: 
+      - nfs-utils
+      - nfs-util-lib
+      state: present
+    tags: filesharing
+
+
+#example 2: adding tags to playbook
+---
+- hosts: all
+  tags:
+    - nginx
+
+  tasks: 
+    - name: Install EPEL
+      yum:
+        name: epel-release
+        update_cache: yes
+        state: present
+      when ansible_distribution == 'Centos'
+      tags:
+        - install-epel
+
+    - name: 
+
+...
+#you can run the playbook with tags
+#ansbile-playbook nginx_playbook.yml --tags nginx
+
+#special tags: always and never
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
+  notify: check http service
+  tags:
+    - always
+
+# no matter which tags you will run, the tasks with tags alawys will run for sure
+
+

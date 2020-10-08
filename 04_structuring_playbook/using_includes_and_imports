@@ -1,0 +1,15 @@
+#using includes and imports
+all import are static
+include: maybe static, maybe dynamic, deponding on the version of ansible
+
+- import_tasks
+- import_playbook
+
+- include_tasks: dynamic
+- include_vars: dynamic
+
+other considerations:
+include_*: dynamic, can be used with loops
+import_*: static, Cannot be used with loops
+
+

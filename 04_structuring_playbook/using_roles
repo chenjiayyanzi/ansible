@@ -1,0 +1,23 @@
+#using roles: load related var files, tasks, handlers
+#and other ansible artifacts based on a known file structure.
+#Once you group your content in roles, you can easily reuse
+#them and share them with other users.
+
+#create file structure:
+ansible-galaxy init nginx
+
+#create the main playbook in the same level of nginx role directory
+# include the role
+cat nginx_playbook.yml
+---
+- hosts: all
+  
+  roles:
+    - nginx
+
+...
+
+#after adding all the contents to the files in roles directory,
+#for example, vars, tasks and handlers etc. you can start to run
+ansible-playbook nginx_playbook.yml
+
