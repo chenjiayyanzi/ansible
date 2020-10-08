@@ -10,8 +10,7 @@ This is a ansible learning project that keeps all my notes and thoughts.
 
 ### Installation
 * Install
----
-*Installation for Linux Ubuntu*
+..*Installation for Linux Ubuntu*
 ```sudo apt-get upgrade
 sudo apt-get install python-minimal virtualenv python-dev build-essential
 mkdir ansible
@@ -41,7 +40,7 @@ ansible-playbook playbook.yml --limit webserver
 ### TroubleShooting
 ---
 * SSH login problem
-On the server you cannot login, run a sshd service using different port:
+..*On the server you cannot login, run a sshd service using different port:
 `sudo /usr/sbin/sshd -d -p 1234`
 Then go to ansible control server, try to connect to it
 `ssh server_name -p 1234`
@@ -54,10 +53,10 @@ forks=5
 log_path=/tmp/log.txt
 ```
 * Ansible Verbosity
- * -v output data is displayed
- * -vv output and input data are displayed
- * -vvv additional information provided for connections to manage hosts
- * -vvvv extra verbosity that includes connection plugins and scripts etc
+..* -v output data is displayed
+..* -vv output and input data are displayed
+..* -vvv additional information provided for connections to manage hosts
+..* -vvvv extra verbosity that includes connection plugins and scripts etc
 
 
 
