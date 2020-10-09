@@ -1,0 +1,11 @@
+---
+- hosts: app
+  gather_facts: true
+
+  tasks:
+    - name: print the hostname and ssh port
+      debug:
+        msg: "{{ hostvars[ansible_all_ipv4_addresses[0]]['ansible_port'] | default('') }}"
+    - name: test groupvars
+      debug:
+        msg: "{{ ansible_user }}"
